@@ -86,4 +86,5 @@
 + (NSString*)dictionaryToJson:(NSDictionary *)dic;
 + (MBProgressHUD *)mbHudLoadingOfView:(UIView *)view;
 + (void)setUserDefaultsValue:(id)value key:(NSString *)key;
++ (NSString *)valueForKey:(NSString *)key;
 @end

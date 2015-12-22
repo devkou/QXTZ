@@ -13,6 +13,7 @@
 + (UserModel *)initWithDic:(id)dic;
 
 @property (assign,nonatomic) BOOL isLogin;
+@property (retain,nonatomic) NSString *pswStr;
 
 @property (retain,nonatomic) NSString *createTime;
 @property (retain,nonatomic) NSString *mobile;
@@ -24,9 +25,9 @@
 //- (void)saveWithUser:(UserModel *)user;
 
 + (instancetype)currentUser;
-- (void)removeUserInfo;
-- (void)saveUserInfo;
-- (void)getUserInfo;
-- (void)deleteSavedUserInfo;
+- (void)removeUserInfo;//用不上
+- (void)saveUserInfo;// 保存用户数据
+- (void)getUserInfo;// 获取保存的用户数据
+- (void)deleteSavedUserInfo;//清除去用户数据
 
 @end

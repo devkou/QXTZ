@@ -604,4 +604,9 @@
     
 }
 
++ (NSString *)valueForKey:(NSString *)key
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
+
 @end

@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "UserModel.h"
 #import "QBTools.h"
+#import "HttpRequestManager.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +23,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-
+    [[UserModel currentUser] getUserInfo];
     if (![UserModel currentUser].isLogin) {
         UINavigationController*loginNav = [mainStoryboard instantiateViewControllerWithIdentifier:@"loginNav"];
         loginNav.navigationBar.tintColor = [UIColor whiteColor];
@@ -67,6 +68,29 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)autoLogin {
+    NSMutableDictionary*parameters = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [parameters setObject:[UserModel currentUser].mobile forKey:@"username"];
+    [parameters setObject:[QBTools md5:[UserModel currentUser].pswStr] forKey:@"password"];
+    
+    MBProgressHUD * hud=[QBTools mbHudLoadingOfView:self.window];
+    [HttpRequestManager POST:LOGIN parameters:parameters block:^(BOOL isSucceed, id responseObject, NSError *error) {
+        [hud hide:YES];
+        if (!error) {
+            if ([[responseObject valueForKey:@"code"] integerValue] == 0) {
+                NSDictionary * userDic = [responseObject objectForKey:@"user"];
+                UserModel *user = [UserModel initWithDic:userDic];
+                [UserModel currentUser].isLogin = YES;
+                [[UserModel currentUser] saveUserInfo];
+            }else{
+                [QBTools JustShowWithType:NO withStatus:[responseObject valueForKey:@"msg"]];
+            }
+        }else{
+            [QBTools JustShowWithType:NO withStatus:error.description];
+        }
+    }];
 }
 
 @end

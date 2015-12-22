@@ -18,7 +18,7 @@
     [UserModel currentUser].realName   = [[dic valueForKey:@"realName"] toString];
     [UserModel currentUser].userKind   = [[dic valueForKey:@"userKind"] toString];
     [UserModel currentUser].userMd5    = [[dic valueForKey:@"userMd5"] toString];
-    
+
     return [UserModel currentUser];
 }
 
@@ -52,6 +52,8 @@
     [UserModel currentUser].realName = nil;
     [UserModel currentUser].userKind = nil;
     [UserModel currentUser].userMd5 = nil;
+    [UserModel currentUser].isLogin = nil;
+    [UserModel currentUser].pswStr = nil;
 }
 
 
@@ -64,6 +66,7 @@
     [QBTools setUserDefaultsValue:[UserModel currentUser].userKind key:@"userKind"];
     [QBTools setUserDefaultsValue:[UserModel currentUser].userMd5 key:@"userMd5"];
     [QBTools setUserDefaultsValue:@([UserModel currentUser].isLogin) key:@"isLogin"];
+    [QBTools setUserDefaultsValue:[UserModel currentUser].pswStr key:@"pswStr"];
 }
 
 
@@ -76,6 +79,7 @@
     [UserModel currentUser].userKind = [QBTools valueForKey:@"userKind"];
     [UserModel currentUser].userMd5 = [QBTools valueForKey:@"userMd5"];
     [UserModel currentUser].isLogin = [[QBTools valueForKey:@"isLogin"] boolValue];
+    [UserModel currentUser].pswStr = [QBTools valueForKey:@"pswStr"];
 
 }
 
@@ -90,6 +94,7 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userKind"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userMd5"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isLogin"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"pswStr"];
     }
     @catch (NSException *exception) {
 

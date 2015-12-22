@@ -11,6 +11,7 @@
 #import <UIImageView+WebCache.h>
 #import "QBTools.h"
 #import "LoginViewController.h"
+#import "UserModel.h"
 
 @interface UserCenterVC ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -53,6 +54,7 @@
 
 - (void)goOutBtn:(UIButton*)sender{
     //退出登陆 清理用户数据
+    [[UserModel currentUser] deleteSavedUserInfo];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController*loginNav = [mainStoryboard instantiateViewControllerWithIdentifier:@"loginNav"];
     loginNav.navigationBar.tintColor = [UIColor whiteColor];
@@ -83,8 +85,8 @@
         [cell.headImgV setUserInteractionEnabled:YES];
         self.headerImageV = cell.headImgV;
         
-        cell.nameLab.text = @"二龙湖豪哥";
-        cell.phoneLab.text = @"手机号码: 18868686688";
+        cell.nameLab.text = [UserModel currentUser].realName;
+        cell.phoneLab.text =[NSString stringWithFormat:@"手机号码:%@",[UserModel currentUser].mobile];
         
         return cell;
     }else{

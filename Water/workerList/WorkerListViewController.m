@@ -46,6 +46,7 @@
 #pragma mark - private
 - (IBAction)gogogo:(UIBarButtonItem *)sender {
     //退出登陆 清理用户数据
+    [[UserModel currentUser] deleteSavedUserInfo];
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController*loginNav = [mainStoryboard instantiateViewControllerWithIdentifier:@"loginNav"];
     loginNav.navigationBar.tintColor = [UIColor whiteColor];
