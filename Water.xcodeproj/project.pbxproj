@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		015829171C292175006B56B7 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 015829161C292175006B56B7 /* UserModel.m */; };
+		0158291B1C292380006B56B7 /* NSObject+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 0158291A1C292380006B56B7 /* NSObject+Convert.m */; };
 		01B07EA61C1966780074F6D1 /* WaterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B07EA51C1966780074F6D1 /* WaterTests.m */; };
 		01B07EB11C1966780074F6D1 /* WaterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B07EB01C1966780074F6D1 /* WaterUITests.m */; };
 		1DB05D40F5F63D47C0A5C6D3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BE30D70B3E62E0C88D093C /* libPods.a */; };
@@ -25,7 +27,6 @@
 		CB47A7651C1C98BB00EF426F /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = CB47A7641C1C98BB00EF426F /* header.png */; };
 		EA3151321C21BE4A00E876D1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151311C21BE4A00E876D1 /* LoginViewController.m */; };
 		EA3151351C21BE5F00E876D1 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151341C21BE5F00E876D1 /* RegisterViewController.m */; };
-		EA3151381C21BE7900E876D1 /* FindMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3151371C21BE7900E876D1 /* FindMeViewController.m */; };
 		EA31513C1C22EBDF00E876D1 /* WorkerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31513B1C22EBDF00E876D1 /* WorkerListViewController.m */; };
 		EA3151401C22EC1D00E876D1 /* WorkerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31513F1C22EC1D00E876D1 /* WorkerListCell.m */; };
 		EA60FF001C26B2A900626544 /* HttpRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60FEFF1C26B2A900626544 /* HttpRequestManager.m */; };
@@ -56,6 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		015829151C292175006B56B7 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		015829161C292175006B56B7 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		015829191C292380006B56B7 /* NSObject+Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Convert.h"; sourceTree = "<group>"; };
+		0158291A1C292380006B56B7 /* NSObject+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Convert.m"; sourceTree = "<group>"; };
 		01B07E881C1966780074F6D1 /* Water.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Water.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B07EA11C1966780074F6D1 /* WaterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B07EA51C1966780074F6D1 /* WaterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaterTests.m; sourceTree = "<group>"; };
@@ -88,8 +93,6 @@
 		EA3151311C21BE4A00E876D1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		EA3151331C21BE5F00E876D1 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		EA3151341C21BE5F00E876D1 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		EA3151361C21BE7900E876D1 /* FindMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindMeViewController.h; sourceTree = "<group>"; };
-		EA3151371C21BE7900E876D1 /* FindMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindMeViewController.m; sourceTree = "<group>"; };
 		EA31513A1C22EBDF00E876D1 /* WorkerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerListViewController.h; sourceTree = "<group>"; };
 		EA31513B1C22EBDF00E876D1 /* WorkerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkerListViewController.m; sourceTree = "<group>"; };
 		EA31513E1C22EC1D00E876D1 /* WorkerListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkerListCell.h; sourceTree = "<group>"; };
@@ -136,6 +139,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		015829141C292167006B56B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				015829151C292175006B56B7 /* UserModel.h */,
+				015829161C292175006B56B7 /* UserModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		015829181C292380006B56B7 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				015829191C292380006B56B7 /* NSObject+Convert.h */,
+				0158291A1C292380006B56B7 /* NSObject+Convert.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		01B07E7F1C1966780074F6D1 = {
 			isa = PBXGroup;
 			children = (
@@ -187,9 +208,9 @@
 		CB47A7131C1C73F700EF426F /* Water */ = {
 			isa = PBXGroup;
 			children = (
+				015829141C292167006B56B7 /* Model */,
 				EA60FF021C26B43000626544 /* helper */,
 				EA60FF061C26B43000626544 /* scan */,
-				EA60FEFD1C26B27300626544 /* Model */,
 				EA60FEE91C26B24700626544 /* Request */,
 				CB47A71D1C1C73F700EF426F /* res */,
 				CB47A72A1C1C74ED00EF426F /* aboutLogin */,
@@ -237,8 +258,6 @@
 				EA3151311C21BE4A00E876D1 /* LoginViewController.m */,
 				EA3151331C21BE5F00E876D1 /* RegisterViewController.h */,
 				EA3151341C21BE5F00E876D1 /* RegisterViewController.m */,
-				EA3151361C21BE7900E876D1 /* FindMeViewController.h */,
-				EA3151371C21BE7900E876D1 /* FindMeViewController.m */,
 			);
 			path = aboutLogin;
 			sourceTree = "<group>";
@@ -299,16 +318,10 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
-		EA60FEFD1C26B27300626544 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		EA60FF021C26B43000626544 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				015829181C292380006B56B7 /* Categories */,
 				EA60FF031C26B43000626544 /* Define.h */,
 				EA60FF041C26B43000626544 /* QBTools.h */,
 				EA60FF051C26B43000626544 /* QBTools.m */,
@@ -416,6 +429,7 @@
 				TargetAttributes = {
 					01B07E871C1966780074F6D1 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = PR9WGR87RW;
 					};
 					01B07EA01C1966780074F6D1 = {
 						CreatedOnToolsVersion = 7.1;
@@ -539,15 +553,16 @@
 				EA31513C1C22EBDF00E876D1 /* WorkerListViewController.m in Sources */,
 				CB47A7631C1C951600EF426F /* UserCenterFirstCell.m in Sources */,
 				EA3151401C22EC1D00E876D1 /* WorkerListCell.m in Sources */,
+				015829171C292175006B56B7 /* UserModel.m in Sources */,
 				EA60FF0C1C26B43000626544 /* QBTools.m in Sources */,
 				EA60FF001C26B2A900626544 /* HttpRequestManager.m in Sources */,
-				EA3151381C21BE7900E876D1 /* FindMeViewController.m in Sources */,
 				CB47A7281C1C73F700EF426F /* ViewController.m in Sources */,
 				CB47A75F1C1C93CB00EF426F /* UserCenterVC.m in Sources */,
 				EA3151351C21BE5F00E876D1 /* RegisterViewController.m in Sources */,
 				EA3151321C21BE4A00E876D1 /* LoginViewController.m in Sources */,
 				CB47A7261C1C73F700EF426F /* main.m in Sources */,
 				CB47A72E1C1C754400EF426F /* ReservationTableVC.m in Sources */,
+				0158291B1C292380006B56B7 /* NSObject+Convert.m in Sources */,
 				EA60FF141C26B9B500626544 /* RegisterCell.m in Sources */,
 				CB47A7211C1C73F700EF426F /* AppDelegate.m in Sources */,
 			);

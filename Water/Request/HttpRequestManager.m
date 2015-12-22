@@ -32,6 +32,10 @@
     [manager GET:[NSString stringWithFormat:@"%@%@",HOST,URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString*str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSDictionary*responseObjectDic = [QBTools dictionaryWithJsonString:str];
+        NSLog(@"GET JSON: %@", responseObjectDic);
+
         block(YES,responseObject,nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(NO,nil,error);
@@ -47,7 +51,10 @@
     [manager POST:[NSString stringWithFormat:@"%@%@",HOST,URLString] parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        block(YES,responseObject,nil);
+        NSString*str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSDictionary*responseObjectDic = [QBTools dictionaryWithJsonString:str];
+        NSLog(@"POST JSON: %@", responseObjectDic);
+        block(YES,responseObjectDic,nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(NO,nil,error);
     }];
@@ -68,6 +75,10 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString*str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSDictionary*responseObjectDic = [QBTools dictionaryWithJsonString:str];
+        NSLog(@"POSTData JSON: %@", responseObjectDic);
+
         block(YES,responseObject,nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         block(NO,nil,error);

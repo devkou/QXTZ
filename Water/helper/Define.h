@@ -19,26 +19,14 @@
 
 #define HOST                @"http://smf.hzsmf.com/"
 
-#define LOGIN               @"mobileTer/regist/login"
-#define REGIST              @"mobileTer/regist/registSubmit"
-#define FORGET_PSW          @"mobileTer/regist/forpwdSubmit"
-#define CHECK_MOBLIE_IS_HAD @"mobileTer/regist/checkMoblie"
-#define GET_SMSCODE         @"mobileTer/user/createSmsCode"
-/*
- //检查手机号是否存在 登陆
- mobileTer/regist/login   参数: username(mobile)  password   返回user   userKind：0为用户  1为安装工
- 
- //注册提交
- mobileTer/regist/registSubmit   参数:  mobile  password  mobCode   generalize_code(你的姓名)
- 
- //忘记密码重置密码提交
- mobileTer/regist/forpwdSubmit	参数： mobile password  mobCode
- 
- //检查手机号是否存在
- mobileTer/regist/checkMoblie   参数： mobile
- 
- //获取验证码
- mobileTer/user/createSmsCode   参数： mobile
- */
+#define LOGIN               @"mobileTer/regist/login"           //登陆
+#define REGIST              @"mobileTer/regist/registSubmit"    //注册
+#define FORGET_PSW          @"mobileTer/regist/forpwdSubmit"    //忘记密码重置密码
+#define CHECK_MOBLIE_IS_HAD @"mobileTer/regist/checkMoblie"     //检查手机号是否存在
+#define GET_SMSCODE         @"mobileTer/user/createSmsCode"     //获取验证码
+
+#define WORKER_ORDER_LIST   @"mobileTer/userOrderTer/userOrderInstal" //安装工登陆派单列表
+#define SURE_INSTAL         @"mobileTer/userOrderTer/sureInstal"      //确认安装
+
 
 #endif /* Define_h */

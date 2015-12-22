@@ -24,7 +24,8 @@
     self.navigationController.navigationBarHidden = NO;
     
     self.navigationItem.titleView = [QBTools getNavBarTitleLabWithStr:@"我的派单" stringColor:[UIColor whiteColor]];
-    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MYWIDTH, CGFLOAT_MIN)];
     [self setupRefresh];
     // Uncomment the following line to preserve selection between presentations.

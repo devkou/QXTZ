@@ -12,6 +12,8 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <SVProgressHUD.h>
 #import <objc/runtime.h>
+#import <PureLayout.h>
+#import <MBProgressHUD.h>
 
 @interface QBTools : NSObject
 
@@ -78,5 +80,9 @@
 //吐死
 + (void) JustShowWithType:(BOOL)isSuccess withStatus:(NSString*)text;
 +(BOOL) isNetworkEnabled;
-+ (NSDictionary*)getObjectData:(id)obj;
+//json格式字符串转字典
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
+//字典转json格式字符串：
++ (NSString*)dictionaryToJson:(NSDictionary *)dic;
++ (MBProgressHUD *)mbHudLoadingOfView:(UIView *)view;
 @end

@@ -467,6 +467,8 @@
 //吐死
 + (void) JustShowWithType:(BOOL)isSuccess withStatus:(NSString*)text
 {
+    [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     if (isSuccess) {
         if (!text) {
             [SVProgressHUD showSuccessWithStatus:@"成功了!"];
@@ -522,61 +524,76 @@
     return YES;
 }
 
-+ (NSDictionary*)getObjectData:(id)obj
-{
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    unsigned int propsCount;
-    objc_property_t *props = class_copyPropertyList([obj class], &propsCount);
-    for(int i = 0;i < propsCount; i++)
-    {
-        objc_property_t prop = props[i];
+//json格式字符串转字典
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    
+    if (jsonString == nil) {
         
-        NSString *propName = [NSString stringWithUTF8String:property_getName(prop)];
-        id value = [obj valueForKey:propName];
-        if(value == nil)
-        {
-            value = [NSNull null];
-        }
-        else
-        {
-            value = [self getObjectInternal:value];
-        }
-        [dic setObject:value forKey:propName];
+        return nil;
+        
     }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *err;
+    
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                         
+                                                        options:NSJSONReadingMutableContainers
+                         
+                                                          error:&err];
+    
+    if(err) {
+        
+        NSLog(@"json解析失败：%@",err);
+        
+        return nil;
+        
+    }
+    
     return dic;
+    
 }
 
-+ (id)getObjectInternal:(id)obj
+//字典转json格式字符串：
++ (NSString*)dictionaryToJson:(NSDictionary *)dic
+
 {
-    if([obj isKindOfClass:[NSString class]]
-       || [obj isKindOfClass:[NSNumber class]]
-       || [obj isKindOfClass:[NSNull class]])
-    {
-        return obj;
-    }
     
-    if([obj isKindOfClass:[NSArray class]])
-    {
-        NSArray *objarr = obj;
-        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:objarr.count];
-        for(int i = 0;i < objarr.count; i++)
-        {
-            [arr setObject:[self getObjectInternal:[objarr objectAtIndex:i]] atIndexedSubscript:i];
-        }
-        return arr;
-    }
+    NSError *parseError = nil;
     
-    if([obj isKindOfClass:[NSDictionary class]])
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+}
+
++ (void)showTipInView:(UIView *)view andMessage:(NSString *)message
+{
+    if (!message || ![message length])
     {
-        NSDictionary *objdic = obj;
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:[objdic count]];
-        for(NSString *key in objdic.allKeys)
-        {
-            [dic setObject:[self getObjectInternal:[objdic objectForKey:key]] forKey:key];
-        }
-        return dic;
+        return;
     }
-    return [self getObjectData:obj];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.detailsLabelText = message;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideAllHUDsForView:view animated:YES];
+        });
+    });
+    
+    return;
+}
+
++ (MBProgressHUD *)mbHudLoadingOfView:(UIView *)view {
+    MBProgressHUD*hud = [[MBProgressHUD alloc] initWithView:view];
+    hud.labelText = @"loading...";
+    [view addSubview:hud];
+    [hud show:YES];
+    
+    return hud;
 }
 
 @end

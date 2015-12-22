@@ -10,6 +10,7 @@
 #import "QBTools.h"
 #import "RegisterViewController.h"
 #import "HttpRequestManager.h"
+#import "UserModel.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -55,26 +56,38 @@
 - (IBAction)login:(UIButton *)sender {
     [self.view endEditing:YES];
     
-    [HttpRequestManager POST:LOGIN parameters:@{@"mobile":@"18606519116",@"password":@"123123"} block:^(BOOL isSucceed, id responseObject, NSError *error) {
-        NSString*str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-    }];
+    NSMutableDictionary*parameters = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [parameters setObject:self.phoneTextField.text forKey:@"username"];
+    [parameters setObject:[QBTools md5:self.pswTestField.text] forKey:@"password"];
     
-    //判断2种类型分别进入不同页面
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    BOOL isFather = YES;//yes 客户 no 安装工
-    if (!isFather) {
-        /**************  安装工页面  *************/
-        UINavigationController*nav = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav"];
-        [nav.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [UIApplication sharedApplication].keyWindow.rootViewController = nav;
-    }else{
-        /**************  客户页面  *************/
-        UINavigationController*nav2 = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav2"];
-        [nav2.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [UIApplication sharedApplication].keyWindow.rootViewController = nav2;
-    }
+    MBProgressHUD * hud=[QBTools mbHudLoadingOfView:self.view];
+    [HttpRequestManager POST:LOGIN parameters:parameters block:^(BOOL isSucceed, id responseObject, NSError *error) {
+        [hud hide:YES];
+        NSDictionary * userDic = [responseObject objectForKey:@"user"];
+        UserModel *user = [UserModel initWithDic:userDic];
+        [user saveWithUser:user];
+        
+        //判断2种类型分别进入不同页面
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        int isFather = [user.userKind integerValue];//0 客户 1 安装工
+        if (isFather == 1) {
+            /**************  安装工页面  *************/
+            UINavigationController*nav = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav"];
+            [nav.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+        }else if (isFather == 0) {
+            /**************  客户页面  *************/
+            UINavigationController*nav2 = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav2"];
+            [nav2.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [UIApplication sharedApplication].keyWindow.rootViewController = nav2;
+        }else{
+            [QBTools showTipInView:self.view andMessage:@"登陆失败"];
+        }
+
+        
+    }];
 }
 - (IBAction)findPsw:(UIButton *)sender {
     //找回密码

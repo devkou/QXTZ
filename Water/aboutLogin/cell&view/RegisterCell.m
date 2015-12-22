@@ -8,7 +8,6 @@
 
 #import "RegisterCell.h"
 #import "QBTools.h"
-#import <PureLayout.h>
 
 @interface RegisterCell ()
 
