@@ -10,6 +10,7 @@
 #import "UserCenterFirstCell.h"
 #import <UIImageView+WebCache.h>
 #import "QBTools.h"
+#import "LoginViewController.h"
 
 @interface UserCenterVC ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -53,9 +54,10 @@
 - (void)goOutBtn:(UIButton*)sender{
     //退出登陆 清理用户数据
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController*loginVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-    [self presentViewController:loginVC animated:YES completion:nil];
-
+    UINavigationController*loginNav = [mainStoryboard instantiateViewControllerWithIdentifier:@"loginNav"];
+    loginNav.navigationBar.tintColor = [UIColor whiteColor];
+//    [UIApplication sharedApplication].keyWindow.rootViewController = loginNav;
+    [self.navigationController presentViewController:loginNav animated:YES completion:nil];
 }
 
 #pragma mark - Table view data source

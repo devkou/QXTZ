@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "LoginViewController.h"
+#import "UserModel.h"
+#import "QBTools.h"
 
 @interface AppDelegate ()
 
@@ -20,9 +22,27 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    if (![UserModel currentUser].isLogin) {
         UINavigationController*loginNav = [mainStoryboard instantiateViewControllerWithIdentifier:@"loginNav"];
-    loginNav.navigationBar.tintColor = [UIColor whiteColor];
-    self.window.rootViewController = loginNav;
+        loginNav.navigationBar.tintColor = [UIColor whiteColor];
+        self.window.rootViewController = loginNav;
+    }else{
+        if ([[[UserModel currentUser] userKind] length]&&[[[UserModel currentUser] userKind] isEqualToString:@"0"]) {
+            //用户
+            /**************  客户页面  *************/
+            UINavigationController*nav2 = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav2"];
+            [nav2.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
+            self.window.rootViewController = nav2;
+        }
+        if ([[[UserModel currentUser] userKind] length]&&[[[UserModel currentUser] userKind] isEqualToString:@"1"]) {
+            //安装工
+            /**************  安装工页面  *************/
+            UINavigationController*nav = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav"];
+            [nav.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
+            self.window.rootViewController = nav;
+        }
+    }
     
     return YES;
 }

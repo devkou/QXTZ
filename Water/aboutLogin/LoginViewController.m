@@ -11,6 +11,7 @@
 #import "RegisterViewController.h"
 #import "HttpRequestManager.h"
 #import "UserModel.h"
+#import "ForPwdViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -63,34 +64,43 @@
     MBProgressHUD * hud=[QBTools mbHudLoadingOfView:self.view];
     [HttpRequestManager POST:LOGIN parameters:parameters block:^(BOOL isSucceed, id responseObject, NSError *error) {
         [hud hide:YES];
-        NSDictionary * userDic = [responseObject objectForKey:@"user"];
-        UserModel *user = [UserModel initWithDic:userDic];
-        [user saveWithUser:user];
-        
-        //判断2种类型分别进入不同页面
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        int isFather = [user.userKind integerValue];//0 客户 1 安装工
-        if (isFather == 1) {
-            /**************  安装工页面  *************/
-            UINavigationController*nav = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav"];
-            [nav.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [UIApplication sharedApplication].keyWindow.rootViewController = nav;
-        }else if (isFather == 0) {
-            /**************  客户页面  *************/
-            UINavigationController*nav2 = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav2"];
-            [nav2.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [UIApplication sharedApplication].keyWindow.rootViewController = nav2;
-        }else{
-            [QBTools showTipInView:self.view andMessage:@"登陆失败"];
-        }
+        if (!error) {
+            if ([[responseObject valueForKey:@"code"] integerValue] == 0) {
+                NSDictionary * userDic = [responseObject objectForKey:@"user"];
+                UserModel *user = [UserModel initWithDic:userDic];
+                [UserModel currentUser].isLogin = YES;
+                [[UserModel currentUser] saveUserInfo];
 
-        
+                //判断2种类型分别进入不同页面                //0 客户 1 安装工
+                UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                if ([[[UserModel currentUser] userKind] length]&&[[[UserModel currentUser] userKind] isEqualToString:@"0"]) {
+                    //用户
+                    /**************  客户页面  *************/
+                    UINavigationController*nav2 = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav2"];
+                    [nav2.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [UIApplication sharedApplication].keyWindow.rootViewController = nav2;
+                }
+                if ([[[UserModel currentUser] userKind] length]&&[[[UserModel currentUser] userKind] isEqualToString:@"1"]) {
+                    //安装工
+                    /**************  安装工页面  *************/
+                    UINavigationController*nav = [mainStoryboard instantiateViewControllerWithIdentifier:@"rootNav"];
+                    [nav.navigationBar setTintColor:RGBACOLOR(57, 127, 198, 1)];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [UIApplication sharedApplication].keyWindow.rootViewController = nav;
+                }
+            }else{
+                [QBTools JustShowWithType:NO withStatus:[responseObject valueForKey:@"msg"]];
+            }
+        }else{
+            [QBTools JustShowWithType:NO withStatus:error.description];
+        }
     }];
 }
 - (IBAction)findPsw:(UIButton *)sender {
     //找回密码
+    ForPwdViewController*forPwdVC = [[ForPwdViewController alloc] init];
+    [self.navigationController pushViewController:forPwdVC animated:YES];
 }
 - (IBAction)regist:(UIButton *)sender {
     //注册

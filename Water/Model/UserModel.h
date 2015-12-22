@@ -11,6 +11,9 @@
 @interface UserModel : NSObject
 
 + (UserModel *)initWithDic:(id)dic;
+
+@property (assign,nonatomic) BOOL isLogin;
+
 @property (retain,nonatomic) NSString *createTime;
 @property (retain,nonatomic) NSString *mobile;
 @property (retain,nonatomic) NSString *nickName;
@@ -18,6 +21,12 @@
 @property (retain,nonatomic) NSString *userKind;
 @property (retain,nonatomic) NSString *userMd5;
 
-- (void)saveWithUser:(UserModel *)user;
+//- (void)saveWithUser:(UserModel *)user;
+
++ (instancetype)currentUser;
+- (void)removeUserInfo;
+- (void)saveUserInfo;
+- (void)getUserInfo;
+- (void)deleteSavedUserInfo;
 
 @end

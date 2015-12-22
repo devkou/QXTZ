@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		015829171C292175006B56B7 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 015829161C292175006B56B7 /* UserModel.m */; };
 		0158291B1C292380006B56B7 /* NSObject+Convert.m in Sources */ = {isa = PBXBuildFile; fileRef = 0158291A1C292380006B56B7 /* NSObject+Convert.m */; };
+		0158291E1C29358E006B56B7 /* ForPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0158291D1C29358E006B56B7 /* ForPwdViewController.m */; };
 		01B07EA61C1966780074F6D1 /* WaterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B07EA51C1966780074F6D1 /* WaterTests.m */; };
 		01B07EB11C1966780074F6D1 /* WaterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B07EB01C1966780074F6D1 /* WaterUITests.m */; };
 		1DB05D40F5F63D47C0A5C6D3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BE30D70B3E62E0C88D093C /* libPods.a */; };
@@ -61,6 +62,8 @@
 		015829161C292175006B56B7 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		015829191C292380006B56B7 /* NSObject+Convert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Convert.h"; sourceTree = "<group>"; };
 		0158291A1C292380006B56B7 /* NSObject+Convert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Convert.m"; sourceTree = "<group>"; };
+		0158291C1C29358E006B56B7 /* ForPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForPwdViewController.h; sourceTree = "<group>"; };
+		0158291D1C29358E006B56B7 /* ForPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForPwdViewController.m; sourceTree = "<group>"; };
 		01B07E881C1966780074F6D1 /* Water.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Water.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B07EA11C1966780074F6D1 /* WaterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B07EA51C1966780074F6D1 /* WaterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaterTests.m; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				EA3151311C21BE4A00E876D1 /* LoginViewController.m */,
 				EA3151331C21BE5F00E876D1 /* RegisterViewController.h */,
 				EA3151341C21BE5F00E876D1 /* RegisterViewController.m */,
+				0158291C1C29358E006B56B7 /* ForPwdViewController.h */,
+				0158291D1C29358E006B56B7 /* ForPwdViewController.m */,
 			);
 			path = aboutLogin;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 				CB47A72E1C1C754400EF426F /* ReservationTableVC.m in Sources */,
 				0158291B1C292380006B56B7 /* NSObject+Convert.m in Sources */,
 				EA60FF141C26B9B500626544 /* RegisterCell.m in Sources */,
+				0158291E1C29358E006B56B7 /* ForPwdViewController.m in Sources */,
 				CB47A7211C1C73F700EF426F /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

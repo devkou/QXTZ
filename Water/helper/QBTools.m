@@ -596,4 +596,12 @@
     return hud;
 }
 
++ (void)setUserDefaultsValue:(id)value key:(NSString *)key
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:value forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
 @end

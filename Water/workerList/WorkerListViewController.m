@@ -12,6 +12,9 @@
 #import "MJRefresh.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ScanViewController.h"
+#import "LoginViewController.h"
+#import "HttpRequestManager.h"
+#import "UserModel.h"
 
 @interface WorkerListViewController ()
 
@@ -44,8 +47,9 @@
 - (IBAction)gogogo:(UIBarButtonItem *)sender {
     //退出登陆 清理用户数据
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UINavigationController*loginVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-    [self presentViewController:loginVC animated:YES completion:nil];
+    UINavigationController*loginNav = [mainStoryboard instantiateViewControllerWithIdentifier:@"loginNav"];
+    loginNav.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController presentViewController:loginNav animated:YES completion:nil];
 }
 
 - (void)setupRefresh
@@ -94,7 +98,20 @@
 - (void)request{
     //请求
     [self stopRereshing];
-    
+    NSMutableDictionary*parameters = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [parameters setObject:[UserModel currentUser].nickName forKey:@"nickName"];
+
+    [HttpRequestManager POST:WORKER_ORDER_LIST parameters:parameters block:^(BOOL isSucceed, id responseObject, NSError *error) {
+        if (!error) {
+            if ([[responseObject valueForKey:@"code"] integerValue] == 0) {
+                [QBTools JustShowWithType:YES withStatus:[responseObject valueForKey:@"msg"]];
+            }else{
+                [QBTools JustShowWithType:NO withStatus:[responseObject valueForKey:@"msg"]];
+            }
+        }else{
+            [QBTools JustShowWithType:NO withStatus:error.debugDescription];
+        }
+    }];
 //    // 变为没有更多数据的状态
 //    [self.tableView.mj_footer endRefreshingWithNoMoreData];
 }

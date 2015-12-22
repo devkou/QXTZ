@@ -13,18 +13,6 @@
 
 @interface RegisterViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
-@property (nonatomic ,strong) UITableView * tableView;
-@property (nonatomic ,strong) UIButton * registBtn;
-
-@property (nonatomic ,strong ) UITextField * textFieldPhone;
-@property (nonatomic ,strong ) UITextField * textFieldCode;
-@property (nonatomic ,strong ) UITextField * textFieldPsw;
-@property (nonatomic ,strong ) UITextField * textFieldName;
-
-@property (nonatomic ,strong) UILabel * getCodeLab;
-@property (nonatomic ,assign) int remainingTime;
-@property (nonatomic ,retain) dispatch_source_t timer;
-
 @end
 
 @implementation RegisterViewController

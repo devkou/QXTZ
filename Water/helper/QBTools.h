@@ -85,4 +85,5 @@
 //字典转json格式字符串：
 + (NSString*)dictionaryToJson:(NSDictionary *)dic;
 + (MBProgressHUD *)mbHudLoadingOfView:(UIView *)view;
++ (void)setUserDefaultsValue:(id)value key:(NSString *)key;
 @end
