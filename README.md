@@ -1,0 +1,1 @@
+1、请先checkout下来后安装cocopoads 并更新里面第三方类库

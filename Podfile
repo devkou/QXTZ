@@ -1,5 +1,5 @@
 platform :ios, "7.0"
-pod "AFNetworking"
+pod 'AFNetworking', '~> 3.0.2'
 pod "MBProgressHUD"
 pod "MJRefresh"
 pod "SDWebImage", "~>3.7"
