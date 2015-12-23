@@ -87,6 +87,7 @@
 {
     
     @try {
+        
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"createTime"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"mobile"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"nickName"];
