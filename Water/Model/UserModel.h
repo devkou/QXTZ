@@ -21,7 +21,7 @@
 @property (retain,nonatomic) NSString *realName;
 @property (retain,nonatomic) NSString *userKind;
 @property (retain,nonatomic) NSString *userMd5;
-
+@property (retain,nonatomic) NSString *token;
 //- (void)saveWithUser:(UserModel *)user;
 
 + (instancetype)currentUser;

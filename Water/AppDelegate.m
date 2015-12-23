@@ -81,7 +81,7 @@
         if (!error) {
             if ([[responseObject valueForKey:@"code"] integerValue] == 0) {
                 NSDictionary * userDic = [responseObject objectForKey:@"user"];
-                UserModel *user = [UserModel initWithDic:userDic];
+                [UserModel initWithDic:userDic];
                 [UserModel currentUser].isLogin = YES;
                 [[UserModel currentUser] saveUserInfo];
             }else{

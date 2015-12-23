@@ -16,7 +16,11 @@
 #import "HttpRequestManager.h"
 #import "UserModel.h"
 
+#define HOME_ROWS 10
+
 @interface WorkerListViewController ()
+@property (nonatomic ,assign) NSInteger nowPage;
+@property (nonatomic ,strong) NSMutableArray *listArr;
 
 @end
 
@@ -25,7 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
-    
+    self.listArr = [[NSMutableArray alloc] initWithCapacity:0];
+
     self.navigationItem.titleView = [QBTools getNavBarTitleLabWithStr:@"我的派单" stringColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
@@ -75,13 +80,13 @@
 -(void)headerRefreshing
 {
     self.tableView.mj_footer.hidden = NO;
-//    self.nowPage = 1;
+    self.nowPage = 1;
     [self request];
 }
 
 - (void)footerRereshing
 {
-//    self.nowPage ++;
+    self.nowPage ++;
     [self request];
 }
 
@@ -101,15 +106,42 @@
     [self stopRereshing];
     NSMutableDictionary*parameters = [[NSMutableDictionary alloc] initWithCapacity:0];
     [parameters setObject:[UserModel currentUser].nickName forKey:@"nickName"];
+    [parameters setObject:[UserModel currentUser].token forKey:@"token"];
+    [parameters setObject:[UserModel currentUser].userMd5 forKey:@"userMd5"];
+    [parameters setObject:[UserModel currentUser].createTime forKey:@"time"];
+    [parameters setObject:@(HOME_ROWS) forKey:@"size"];
+    [parameters setObject:@(self.nowPage) forKey:@"page"];
 
     [HttpRequestManager POST:WORKER_ORDER_LIST parameters:parameters block:^(BOOL isSucceed, id responseObject, NSError *error) {
         if (!error) {
             if ([[responseObject valueForKey:@"code"] integerValue] == 0) {
                 [QBTools JustShowWithType:YES withStatus:[responseObject valueForKey:@"msg"]];
+                NSArray * rows = [[responseObject objectForKey:@"orderPage"] objectForKey:@"list"];
+                if (self.nowPage == 1) {
+                    self.listArr = [NSMutableArray arrayWithArray:rows];
+                }
+                else {
+                    [self.listArr addObjectsFromArray:rows];
+                }
+                [self.tableView reloadData];
+                
+                NSInteger total = [[[responseObject objectForKey:@"orderPage"] objectForKey:@"totalRow"]integerValue];
+                if (total ==0) {
+                    
+                }
+                    if (self.nowPage * HOME_ROWS >= total) {
+                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                    }
+                    else  {
+                        [self.tableView.mj_footer resetNoMoreData];
+                    }
+                
             }else{
                 [QBTools JustShowWithType:NO withStatus:[responseObject valueForKey:@"msg"]];
             }
+            [self stopRereshing];
         }else{
+            [self stopRereshing];
             [QBTools JustShowWithType:NO withStatus:error.debugDescription];
         }
     }];

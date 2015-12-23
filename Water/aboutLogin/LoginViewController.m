@@ -67,8 +67,9 @@
         if (!error) {
             if ([[responseObject valueForKey:@"code"] integerValue] == 0) {
                 NSDictionary * userDic = [responseObject objectForKey:@"user"];
-                UserModel *user = [UserModel initWithDic:userDic];
+                UserModel * user=[UserModel initWithDic:userDic];
                 [UserModel currentUser].isLogin = YES;
+                [UserModel currentUser].token = [QBTools md5:[NSString stringWithFormat:@"%@%@%@",sixKey,user.createTime,user.userMd5]];
                 [[UserModel currentUser] saveUserInfo];
 
                 //判断2种类型分别进入不同页面                //0 客户 1 安装工
