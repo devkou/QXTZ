@@ -9,7 +9,9 @@
 #ifndef Define_h
 #define Define_h
 
-#define MYWIDTH    [UIScreen mainScreen].bounds.size.width
+#define sixKey      @"9211baf221e124d82c4a330901f176e0"
+
+#define MYWIDTH     [UIScreen mainScreen].bounds.size.width
 #define MYHEIGHT    [UIScreen mainScreen].bounds.size.height
 
 
